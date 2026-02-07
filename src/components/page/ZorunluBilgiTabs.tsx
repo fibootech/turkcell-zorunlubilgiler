@@ -213,7 +213,7 @@ export const ZorunluBilgiTabs = ({
                   {filteredItems.map((item, index) => (
                     <button
                       key={item.id}
-                      ref={el => tabRefs.current[index] = el}
+                      ref={(el) => { tabRefs.current[index] = el; }}
                       onClick={() => setActiveTabIndex(index)}
                       className={`px-4 py-2.5 text-[13px] font-medium whitespace-nowrap transition-all ${
                         activeTabIndex === index
