@@ -47,6 +47,19 @@ export const ZorunluBilgiKategorili = ({
     return null;
   };
 
+  const getStatus = (createdAt: string, updatedAt: string): 'new' | 'updated' | null => {
+    const now = new Date();
+    const created = new Date(createdAt);
+    const updated = new Date(updatedAt);
+    
+    const diffCreated = Math.ceil(Math.abs(now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24));
+    const diffUpdated = Math.ceil(Math.abs(now.getTime() - updated.getTime()) / (1000 * 60 * 60 * 24));
+    
+    if (diffCreated <= 15) return 'new';
+    if (diffUpdated <= 15) return 'updated';
+    return null;
+  };
+
   const toggleItem = (id: number) => {
     setExpandedIds(prev => 
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
@@ -322,6 +335,7 @@ export const ZorunluBilgiKategorili = ({
                         const isOpen = expandedIds.includes(item.id);
                         const isRead = readIds.has(item.id);
                         const hasScript = item.contentHtml.includes('script-block');
+                        const status = getStatus(item.createdAt, item.updatedAt);
 
                         return (
                           <div key={item.id} className="border-b border-[#F3F4F6] last:border-b-0">
@@ -355,6 +369,16 @@ export const ZorunluBilgiKategorili = ({
                                   {item.title}
                                 </span>
                                 <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
+                                  {status === 'new' && (
+                                    <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[9px] font-bold rounded border border-green-200 animate-pulse">
+                                      YENİ
+                                    </span>
+                                  )}
+                                  {status === 'updated' && (
+                                    <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 text-[9px] font-bold rounded border border-blue-200 animate-pulse">
+                                      GÜNCELLENDİ
+                                    </span>
+                                  )}
                                   {hasScript && (
                                     <span className="px-1.5 py-0.5 bg-[#FFF3E0] text-[#E65100] text-[9px] font-bold rounded border border-[#FFE0B2]">
                                       S

@@ -29,7 +29,7 @@ export const mockZorunluBilgiler: ZorunluBilgi[] = [
     `,
     isActive: true,
     createdAt: "2024-01-15",
-    updatedAt: "2024-12-01",
+    updatedAt: "2026-02-05",
     usageCount: 45
   },
   {
@@ -55,8 +55,8 @@ export const mockZorunluBilgiler: ZorunluBilgi[] = [
       </ul>
     `,
     isActive: true,
-    createdAt: "2024-02-10",
-    updatedAt: "2024-11-20",
+    createdAt: "2026-02-05",
+    updatedAt: "2026-02-05",
     usageCount: 52
   },
   {
